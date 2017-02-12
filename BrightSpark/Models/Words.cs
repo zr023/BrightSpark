@@ -24,7 +24,8 @@ namespace BrightSpark.Models
             Dictionary<int, string> dictionary = new Dictionary<int, string>();
             dictionary.Add(1, "dog");
             dictionary.Add(2, "cat");
-            dictionary.Add(3, "horse");
+            dictionary.Add(3, "cat");
+            dictionary.Add(4, "horse");
 
 
             // Set the default sort value to "id"
