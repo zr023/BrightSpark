@@ -37,7 +37,7 @@ namespace BrightSparkRESTfull.Models
 
     }
 
-    //Object containing the the value of n that we are requesting, and the nth number in the Fibonacci sequence
+    //Object containing the value of n that we are requesting, and the nth number in the Fibonacci sequence
     public struct FibonacciObject
     {
         public uint numberRequested;
