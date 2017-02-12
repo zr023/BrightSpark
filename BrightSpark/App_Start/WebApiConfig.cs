@@ -19,6 +19,11 @@ namespace BrightSpark
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            config.Routes.MapHttpRoute(
+                name: "GetWords",
+                routeTemplate: "api/{controller}/{sort}/{unique}");
+
         }
     }
 }

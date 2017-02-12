@@ -7,8 +7,13 @@ namespace BrightSparkRESTfull.Models
 {
     public class Fibonacci
     {
-        // Return the fibonachi object consisting of the number requested and nth number in the sequence 
-        // based on n (iterative approach).
+
+        /// <summary>
+        /// Return the fibonachi object consisting of the number requested and nth number in the sequence 
+        /// based on n (iterative approach).
+        /// </summary>
+        /// <param name="n"></param>
+        /// <returns></returns>
         public FibonacciObject GetNthFibonacciNumberIterative(uint n)
         {
             FibonacciObject fb = new FibonacciObject();
@@ -37,7 +42,9 @@ namespace BrightSparkRESTfull.Models
 
     }
 
-    //Object containing the value of n that we are requesting, and the nth number in the Fibonacci sequence
+    /// <summary>
+    /// Structure containing the value of n that we are requesting, and the nth number in the Fibonacci sequence
+    /// </summary>
     public struct FibonacciObject
     {
         public uint numberRequested;

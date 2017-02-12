@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using BrightSpark.Models;
 
 namespace BrightSpark.Controllers
 {
@@ -14,6 +15,15 @@ namespace BrightSpark.Controllers
         {
             return new string[] { "value1", "value2" };
         }
+
+        // GET: api/Words/id/true
+        public IEnumerable<string> GetWords(string sort, bool unique)
+        {
+            BrightSpark.Models.Words w = new Words();
+            var result = w.GetWords(sort, unique);
+            return result.Values;
+        }
+
 
         // GET: api/Words/5
         public string Get(int id)
