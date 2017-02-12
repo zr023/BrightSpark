@@ -19,7 +19,7 @@ namespace BrightSpark.Controllers
         // GET: api/Words/id/true
         public IEnumerable<string> GetWords(string sort, bool unique)
         {
-            BrightSpark.Models.Words w = new Words();
+            Words w = new Words();
             var result = w.GetWords(sort, unique);
             return result.Values;
         }
