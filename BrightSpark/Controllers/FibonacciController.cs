@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using BrightSpark.Models;
+using Newtonsoft.Json;
 
 namespace BrightSpark.Controllers
 {
@@ -16,11 +17,18 @@ namespace BrightSpark.Controllers
             return new string[] { "value1", "value2" };
         }
 
+
         // GET: api/Fibonacci/5
-        public string Get(int id)
+        [Route("v1/Fibonacci/{n}")]
+        public string GetFibonacci(uint n)
         {
-            return "value";
+            Fibonacci f = new Fibonacci();
+            FibonacciObject fbResult = f.GetNthFibonacciNumberIterative(n);
+            // Serialise to json as per swagger
+            return JsonConvert.SerializeObject(fbResult);  
         }
+
+        
 
         // POST: api/Fibonacci
         public void Post([FromBody]string value)

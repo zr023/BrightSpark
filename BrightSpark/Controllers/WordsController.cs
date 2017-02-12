@@ -16,7 +16,7 @@ namespace BrightSpark.Controllers
             return new string[] { "value1", "value2" };
         }
 
-        // GET: api/Words/id/true
+        // GET: v1/words/id/true
         public IEnumerable<string> GetWords(string sort, bool unique)
         {
             Words w = new Words();

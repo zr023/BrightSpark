@@ -16,13 +16,14 @@ namespace BrightSpark
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
+                routeTemplate: "v1/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
 
             config.Routes.MapHttpRoute(
                 name: "GetWords",
-                routeTemplate: "api/{controller}/{sort}/{unique}");
+                routeTemplate: "v1/{controller}/{sort}/{unique}",
+                defaults: new { sort = RouteParameter.Optional, unique = RouteParameter.Optional });
 
         }
     }
