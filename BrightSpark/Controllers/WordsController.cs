@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using BrightSpark.Models;
 
+
 namespace BrightSpark.Controllers
 {
     public class WordsController : ApiController
@@ -36,6 +37,7 @@ namespace BrightSpark.Controllers
         {
             Words w = new Words();
             return w.AddWords(value); 
+
         }
 
         // PUT: api/Words/5
@@ -44,8 +46,25 @@ namespace BrightSpark.Controllers
         }
 
         // DELETE: api/Words/5
-        public void Delete(int id)
+        public HttpResponseMessage Delete()
         {
+            Words w = new Words();
+            HttpResponseMessage response;
+            if (w.DeleteAllWords() == "ok")
+            {
+                response =
+                    this.Request.CreateResponse(HttpStatusCode.OK, "All words are succesfuly deleted.");
+            }
+            else
+            {
+                response =
+                    this.Request.CreateResponse(HttpStatusCode.InternalServerError, "Unspecified error.");
+            }
+
+
+            return response;
+
+
         }
     }
 }

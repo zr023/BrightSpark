@@ -7,7 +7,7 @@ namespace BrightSpark.Models
 {
     public class Words
     {
-        public static Dictionary<int, string> dicp = new Dictionary<int, string>();
+        public  Dictionary<int, string> dicp = new Dictionary<int, string>();
 
         /// <summary>
         /// Value    | Behaviour
@@ -23,11 +23,11 @@ namespace BrightSpark.Models
         {
             Dictionary<int, string> result = new Dictionary<int, string>();
             Dictionary<int, string> dictionary = new Dictionary<int, string>();
-            dictionary.Add(1, "dog");
-            dictionary.Add(2, "cat");
-            dictionary.Add(3, "cat");
-            dictionary.Add(4, "horse");
-
+            //dictionary.Add(1, "dog");
+            //dictionary.Add(2, "cat");
+            //dictionary.Add(3, "cat");
+            //dictionary.Add(4, "horse");
+            dictionary = dicp;
 
             // Set the default sort value to "id"
             var items = from pair in dictionary orderby pair.Key ascending select pair;
@@ -72,16 +72,18 @@ namespace BrightSpark.Models
         public Dictionary<int, string> AddWords(string[] sa)
         {
             // Assign id to each word in array
-            foreach (string word in sa)
-            {
+           
                 int dc = dicp.Count();
                 if (dc != 0)
                 {
-                    for (int id = 0; id <= dc; id++)
+                    foreach (string word in sa)
                     {
-                        if (!dicp.ContainsKey(id))
+                        for (int id = 0; id <= dc; id++)
                         {
-                            dicp.Add(id, word);
+                            if (!dicp.ContainsKey(id))
+                            {
+                                dicp.Add(id, word);
+                            }
                         }
                     }
                 }
@@ -90,13 +92,27 @@ namespace BrightSpark.Models
                     int idn = 0;
                     foreach (string wordn in sa)
                     {
-                        dicp.Add(idn, word);
+                        dicp.Add(idn, wordn);
                         idn++;
                     }
+                    
                 }
-            }
-
             return dicp;
+        }
+        /// <summary>
+        /// Delete all words in dictionary
+        /// </summary>
+        public string DeleteAllWords()
+        {
+            try
+            {
+                dicp.Clear();
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+            return "ok";
         }
     }
     
