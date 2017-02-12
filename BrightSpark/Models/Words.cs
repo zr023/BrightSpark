@@ -7,6 +7,7 @@ namespace BrightSpark.Models
 {
     public class Words
     {
+        public static Dictionary<int, string> dicp = new Dictionary<int, string>();
 
         /// <summary>
         /// Value    | Behaviour
@@ -46,7 +47,7 @@ namespace BrightSpark.Models
                         break;
                 }
 
-                 
+                // Remove duplicate values
                 Dictionary<int, string> uniqueValues = new Dictionary<int, string>();
                 if (unique)
                 {
@@ -59,8 +60,52 @@ namespace BrightSpark.Models
                     result = items.ToDictionary(pair => pair.Key, pair => pair.Value); ;
                 }
 
-
+            dicp = result;
             return result;
         }
-   }
+
+        /// <summary>
+        /// Add array of words to existing dictionary and return the new dictionary
+        /// </summary>
+        /// <param name="dic"></param>
+        /// <returns></returns>
+        public Dictionary<int, string> AddWords(string[] sa)
+        {
+            // Assign id to each word in array
+            foreach (string word in sa)
+            {
+                int dc = dicp.Count();
+                if (dc != 0)
+                {
+                    for (int id = 0; id <= dc; id++)
+                    {
+                        if (!dicp.ContainsKey(id))
+                        {
+                            dicp.Add(id, word);
+                        }
+                    }
+                }
+                else //in case dictionary is empty
+                {
+                    int idn = 0;
+                    foreach (string wordn in sa)
+                    {
+                        dicp.Add(idn, word);
+                        idn++;
+                    }
+                }
+            }
+
+            return dicp;
+        }
+    }
+    
+    /// <summary>
+    /// Structure containing the value of n that we are requesting, and the nth number in the Fibonacci sequence
+    /// </summary>
+    public struct WordsStruct
+    {
+        public uint wordId;
+        public string word;
+    }
 }

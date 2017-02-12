@@ -32,8 +32,10 @@ namespace BrightSpark.Controllers
         }
 
         // POST: api/Words
-        public void Post([FromBody]string value)
+        public Dictionary<int, string> Post([FromBody]string[] value)
         {
+            Words w = new Words();
+            return w.AddWords(value); 
         }
 
         // PUT: api/Words/5

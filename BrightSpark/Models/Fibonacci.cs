@@ -14,9 +14,9 @@ namespace BrightSpark.Models
         /// </summary>
         /// <param name="n"></param>
         /// <returns></returns>
-        public FibonacciObject GetNthFibonacciNumberIterative(uint n)
+        public FibonacciStruct GetNthFibonacciNumberIterative(uint n)
         {
-            FibonacciObject fb = new FibonacciObject();
+            FibonacciStruct fb = new FibonacciStruct();
             fb.numberRequested = n;
 
             if (n == 1 || n == 2)
@@ -45,7 +45,7 @@ namespace BrightSpark.Models
     /// <summary>
     /// Structure containing the value of n that we are requesting, and the nth number in the Fibonacci sequence
     /// </summary>
-    public struct FibonacciObject
+    public struct FibonacciStruct
     {
         public uint numberRequested;
         public uint nthNumberOfFibonacciSequence;
