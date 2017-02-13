@@ -68,41 +68,42 @@ namespace BrightSpark.Models
         /// <returns></returns>
         public Dictionary<int, string> AddWords(string[] sa)
         {
-          
-            int dc = dicp.Count();
-            if (dc != 0)
-            {
-               
-                int countsa = 0;
-                int countdicp = 0;
-
-                Dictionary<string, int> counts = sa.GroupBy(x => x)
-                                  .ToDictionary(g => g.Key,
-                                                g => g.Count());
-
-                foreach (string word in sa)
+           // try
+           // {
+                int dc = dicp.Count();
+                if (dc != 0)
                 {
 
-                    // Count the number of occurences in dicp
-                    countdicp = dicp.Count(kvp => kvp.Value.Contains(word));
+                    int countsa = 0;
+                    int countdicp = 0;
 
-                    // Count the number of occurence in each word in sa
-                    countsa = counts.FirstOrDefault(x => x.Key == word).Value;
+                    Dictionary<string, int> counts = sa.GroupBy(x => x)
+                                      .ToDictionary(g => g.Key,
+                                                    g => g.Count());
 
-
-                    if (countdicp != countsa)
+                    foreach (string word in sa)
                     {
-                        for (int id = 0; id <= dc; id++)
+
+                        // Count the number of occurences in dicp
+                        countdicp = dicp.Count(kvp => kvp.Value.Contains(word));
+
+                        // Count the number of occurence in each word in sa
+                        countsa = counts.FirstOrDefault(x => x.Key == word).Value;
+
+
+                        if (countdicp != countsa)
                         {
-                            if (!dicp.ContainsKey(id))
+                            for (int id = 0; id <= dc; id++)
                             {
-                                dicp.Add(id, word);
+                                if (!dicp.ContainsKey(id))
+                                {
+                                    dicp.Add(id, word);
+                                }
                             }
                         }
                     }
                 }
-            }
-            else //in case dictionary is empty
+                else //in case dictionary is empty
                 {
                     int idn = 0;
                     foreach (string wordn in sa)
@@ -110,8 +111,14 @@ namespace BrightSpark.Models
                         dicp.Add(idn, wordn);
                         idn++;
                     }
-                    
+
                 }
+            //}
+           // catch (Exception ex)
+           // {
+
+           // }
+
             return dicp;
         }
         /// <summary>

@@ -18,7 +18,7 @@ namespace BrightSpark.Controllers
         }
 
         // GET: v1/words/id/true
-        public IEnumerable<string> GetWords(string sort, bool unique)
+        public Dictionary<int, string> GetWords(string sort, bool unique)
         {
             Dictionary<int, string> result = new Dictionary<int, string>(); ;
             try
@@ -29,11 +29,11 @@ namespace BrightSpark.Controllers
             catch (Exception)
             {
                 HttpResponseMessage response =
-                    this.Request.CreateResponse(HttpStatusCode.InternalServerError, "Unspecified error.");
+                    this.Request.CreateResponse(HttpStatusCode.BadRequest, "Unspecified error.");
                 throw new HttpResponseException(response);
             }
 
-            return result.Values;
+            return result;
         }
 
 
@@ -46,6 +46,14 @@ namespace BrightSpark.Controllers
         // POST: api/Words
         public Dictionary<int, string> Post([FromBody]string[] value)
         {
+            if (value == null)
+            {
+                HttpResponseMessage response =
+                                  this.Request.CreateResponse(HttpStatusCode.BadRequest, "Unspecified error.");
+                throw new HttpResponseException(response);
+            }
+
+
             Words w = new Words();
             return w.AddWords(value); 
 
