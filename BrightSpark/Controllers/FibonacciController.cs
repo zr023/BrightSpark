@@ -23,11 +23,21 @@ namespace BrightSpark.Controllers
         public FibonacciStruct GetFibonacci(uint n)
         {
             Fibonacci f = new Fibonacci();
-            FibonacciStruct fbResult = f.GetNthFibonacciNumberIterative(n);
+            FibonacciStruct fbResult = new FibonacciStruct();
+            try
+            {
+                fbResult = f.GetNthFibonacciNumberIterative(n);
+            }
+            catch (Exception)
+            {
+                HttpResponseMessage response =
+                    this.Request.CreateResponse(HttpStatusCode.InternalServerError, "Unspecified error.");
+                throw new HttpResponseException(response);
+            }
+
             return fbResult;  
         }
 
-        
 
         // POST: api/Fibonacci
         public void Post([FromBody]string value)

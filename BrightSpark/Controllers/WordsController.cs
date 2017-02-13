@@ -20,8 +20,19 @@ namespace BrightSpark.Controllers
         // GET: v1/words/id/true
         public IEnumerable<string> GetWords(string sort, bool unique)
         {
-            Words w = new Words();
-            var result = w.GetWords(sort, unique);
+            Dictionary<int, string> result = new Dictionary<int, string>(); ;
+            try
+            {
+                Words w = new Words();
+                result = w.GetWords(sort, unique);
+            }
+            catch (Exception)
+            {
+                HttpResponseMessage response =
+                    this.Request.CreateResponse(HttpStatusCode.InternalServerError, "Unspecified error.");
+                throw new HttpResponseException(response);
+            }
+
             return result.Values;
         }
 
@@ -58,7 +69,7 @@ namespace BrightSpark.Controllers
             else
             {
                 response =
-                    this.Request.CreateResponse(HttpStatusCode.InternalServerError, "Unspecified error.");
+                    this.Request.CreateResponse(HttpStatusCode.BadRequest, "Unexpected error."); //It is not really a bad request but the swagger suggest code 400 
             }
 
 

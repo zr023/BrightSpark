@@ -7,7 +7,7 @@ namespace BrightSpark.Models
 {
     public class Words
     {
-        public  Dictionary<int, string> dicp = new Dictionary<int, string>();
+        public static Dictionary<int, string> dicp = new Dictionary<int, string>();
 
         /// <summary>
         /// Value    | Behaviour
@@ -23,10 +23,7 @@ namespace BrightSpark.Models
         {
             Dictionary<int, string> result = new Dictionary<int, string>();
             Dictionary<int, string> dictionary = new Dictionary<int, string>();
-            //dictionary.Add(1, "dog");
-            //dictionary.Add(2, "cat");
-            //dictionary.Add(3, "cat");
-            //dictionary.Add(4, "horse");
+
             dictionary = dicp;
 
             // Set the default sort value to "id"
@@ -65,18 +62,35 @@ namespace BrightSpark.Models
         }
 
         /// <summary>
-        /// Add array of words to existing dictionary and return the new dictionary
+        ///  Add array of words to existing dictionary and return the new dictionary
         /// </summary>
-        /// <param name="dic"></param>
+        /// <param name="sa"></param>
         /// <returns></returns>
         public Dictionary<int, string> AddWords(string[] sa)
         {
-            // Assign id to each word in array
-           
-                int dc = dicp.Count();
-                if (dc != 0)
+          
+            int dc = dicp.Count();
+            if (dc != 0)
+            {
+               
+                int countsa = 0;
+                int countdicp = 0;
+
+                Dictionary<string, int> counts = sa.GroupBy(x => x)
+                                  .ToDictionary(g => g.Key,
+                                                g => g.Count());
+
+                foreach (string word in sa)
                 {
-                    foreach (string word in sa)
+
+                    // Count the number of occurences in dicp
+                    countdicp = dicp.Count(kvp => kvp.Value.Contains(word));
+
+                    // Count the number of occurence in each word in sa
+                    countsa = counts.FirstOrDefault(x => x.Key == word).Value;
+
+
+                    if (countdicp != countsa)
                     {
                         for (int id = 0; id <= dc; id++)
                         {
@@ -87,7 +101,8 @@ namespace BrightSpark.Models
                         }
                     }
                 }
-                else //in case dictionary is empty
+            }
+            else //in case dictionary is empty
                 {
                     int idn = 0;
                     foreach (string wordn in sa)
