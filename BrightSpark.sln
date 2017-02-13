@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrightSpark", "BrightSpark\BrightSpark.csproj", "{08F2A1B5-1F16-43A5-833E-8602904C9872}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestBrightSpark", "UnitTestBrightSpark\UnitTestBrightSpark.csproj", "{24312977-54D0-4772-B5C1-46683858D1A6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{08F2A1B5-1F16-43A5-833E-8602904C9872}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{08F2A1B5-1F16-43A5-833E-8602904C9872}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{08F2A1B5-1F16-43A5-833E-8602904C9872}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24312977-54D0-4772-B5C1-46683858D1A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24312977-54D0-4772-B5C1-46683858D1A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24312977-54D0-4772-B5C1-46683858D1A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24312977-54D0-4772-B5C1-46683858D1A6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
