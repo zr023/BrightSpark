@@ -46,16 +46,17 @@ namespace BrightSpark.Controllers
         // POST: api/Words
         public Dictionary<int, string> Post([FromBody]string[] value)
         {
-            if (value == null)
+
+            Words w = new Words();
+            Dictionary<int, string> rsp = w.AddWords(value);
+
+            if (value == null || rsp == null)
             {
                 HttpResponseMessage response =
                                   this.Request.CreateResponse(HttpStatusCode.BadRequest, "Unspecified error.");
                 throw new HttpResponseException(response);
             }
-
-
-            Words w = new Words();
-            return w.AddWords(value); 
+            return rsp;
 
         }
 
@@ -77,7 +78,7 @@ namespace BrightSpark.Controllers
             else
             {
                 response =
-                    this.Request.CreateResponse(HttpStatusCode.BadRequest, "Unexpected error."); //It is not really a bad request but the swagger suggest code 400 
+                    this.Request.CreateResponse(HttpStatusCode.BadRequest, "Unexpected error."); //It is not really a bad request but the swagger suggests code 400 
             }
 
 

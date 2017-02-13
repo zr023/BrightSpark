@@ -68,8 +68,8 @@ namespace BrightSpark.Models
         /// <returns></returns>
         public Dictionary<int, string> AddWords(string[] sa)
         {
-           // try
-           // {
+            try
+            {
                 int dc = dicp.Count();
                 if (dc != 0)
                 {
@@ -113,11 +113,11 @@ namespace BrightSpark.Models
                     }
 
                 }
-            //}
-           // catch (Exception ex)
-           // {
-
-           // }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
 
             return dicp;
         }
