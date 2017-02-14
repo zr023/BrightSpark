@@ -11,6 +11,11 @@ namespace BrightSpark.Controllers
 {
     public class FibonacciController : ApiController
     {
+        private static readonly log4net.ILog log =
+            log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
+
+
         // GET: api/Fibonacci
         public IEnumerable<string> Get()
         {
@@ -22,6 +27,8 @@ namespace BrightSpark.Controllers
         [Route("v1/Fibonacci/{n}")]
         public FibonacciStruct GetFibonacci(uint n)
         {
+            log.Debug("GetFibonacci - Requested value is: "+ n.ToString());
+
             Fibonacci f = new Fibonacci();
             FibonacciStruct fbResult = new FibonacciStruct();
             try
@@ -30,10 +37,16 @@ namespace BrightSpark.Controllers
             }
             catch (Exception)
             {
+
                 HttpResponseMessage response =
                     this.Request.CreateResponse(HttpStatusCode.InternalServerError, "Unspecified error.");
+                log.Fatal(response.ToString());
                 throw new HttpResponseException(response);
+
             }
+
+            log.Debug("GetFibonacci - Response is the value requested: " + fbResult.numberRequested.ToString());
+            log.Debug("GetFibonacci - Response is nth value in sequence: " + fbResult.nthNumberOfFibonacciSequence.ToString());
 
             return fbResult;  
         }

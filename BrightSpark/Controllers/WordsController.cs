@@ -11,6 +11,9 @@ namespace BrightSpark.Controllers
 {
     public class WordsController : ApiController
     {
+        private static readonly log4net.ILog log =
+            log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         // GET: api/Words
         public IEnumerable<string> Get()
         {
@@ -20,6 +23,10 @@ namespace BrightSpark.Controllers
         // GET: v1/words/id/true
         public Dictionary<int, string> GetWords(string sort, bool unique)
         {
+            // Log request
+            log.Debug("GetWords - Requested sort value is: " + sort);
+            log.Debug("GetWords - Requested unique value is: " + unique.ToString());
+
             Dictionary<int, string> result = new Dictionary<int, string>(); ;
             try
             {
@@ -30,7 +37,14 @@ namespace BrightSpark.Controllers
             {
                 HttpResponseMessage response =
                     this.Request.CreateResponse(HttpStatusCode.BadRequest, "Unspecified error.");
+                log.Fatal(response.ToString());
                 throw new HttpResponseException(response);
+            }
+
+            // Log response
+            foreach (KeyValuePair<int, string> entry in result)
+            {
+                log.Debug("Response is the words requested: " + entry.ToString());
             }
 
             return result;
@@ -46,6 +60,11 @@ namespace BrightSpark.Controllers
         // POST: api/Words
         public Dictionary<int, string> Post([FromBody]string[] value)
         {
+            // Log request
+            foreach (string s in value)
+            {
+                log.Debug("Post -Requested value is: " + s);
+            }
 
             Words w = new Words();
             Dictionary<int, string> rsp = w.AddWords(value);
@@ -54,8 +73,16 @@ namespace BrightSpark.Controllers
             {
                 HttpResponseMessage response =
                                   this.Request.CreateResponse(HttpStatusCode.BadRequest, "Unspecified error.");
+                log.Fatal(response.ToString());
                 throw new HttpResponseException(response);
             }
+
+            // Log response
+            foreach (KeyValuePair<int, string> entry in rsp)
+            {
+                log.Debug("Post - Response is the words requested: " + entry.ToString());
+            }
+
             return rsp;
 
         }
@@ -68,6 +95,7 @@ namespace BrightSpark.Controllers
         // DELETE: api/Words/5
         public HttpResponseMessage Delete()
         {
+
             HttpResponseMessage response = new HttpResponseMessage();
             try
             {
@@ -86,10 +114,11 @@ namespace BrightSpark.Controllers
             catch (Exception)
             {
                 //response = this.Request.CreateResponse(HttpStatusCode.BadRequest, "Unspecified error.");
+                log.Fatal(response.ToString());
                 //throw new HttpResponseException(response);
             }
 
-
+            log.Debug("Delete words: " + response.ToString());
             return response;
 
 
