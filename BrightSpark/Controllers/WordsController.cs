@@ -68,17 +68,25 @@ namespace BrightSpark.Controllers
         // DELETE: api/Words/5
         public HttpResponseMessage Delete()
         {
-            Words w = new Words();
-            HttpResponseMessage response;
-            if (w.DeleteAllWords() == "ok")
+            HttpResponseMessage response = new HttpResponseMessage();
+            try
             {
-                response =
-                    this.Request.CreateResponse(HttpStatusCode.OK, "All words are succesfuly deleted.");
+                Words w = new Words();
+                if (w.DeleteAllWords() == "ok")
+                {
+                    response =
+                        this.Request.CreateResponse(HttpStatusCode.OK, "All words are succesfuly deleted.");
+                }
+                else
+                {
+                    response =
+                        this.Request.CreateResponse(HttpStatusCode.BadRequest, "Unexpected error."); //It is not really a bad request but the swagger suggests code 400 
+                }
             }
-            else
+            catch (Exception)
             {
-                response =
-                    this.Request.CreateResponse(HttpStatusCode.BadRequest, "Unexpected error."); //It is not really a bad request but the swagger suggests code 400 
+                //response = this.Request.CreateResponse(HttpStatusCode.BadRequest, "Unspecified error.");
+                //throw new HttpResponseException(response);
             }
 
 

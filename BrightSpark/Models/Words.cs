@@ -114,7 +114,7 @@ namespace BrightSpark.Models
 
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return null;
             }
